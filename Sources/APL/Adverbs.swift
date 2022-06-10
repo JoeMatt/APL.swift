@@ -8,8 +8,8 @@
 
 import Foundation
 
-infix operator / {}
-infix operator ⧵ {}
+infix operator /
+infix operator ⧵
 
 public func /<A>(f: A -> A -> A, xs0: [A]) -> A {
 	let hd = xs0[0]
@@ -32,7 +32,7 @@ public func ⧵<A>(f: A -> A -> A, xs0: [[A]]) -> [A] {
 	})
 }
 
-infix operator • {}
+infix operator •
 
 public func •<A>(var f : A -> A, times: UInt) -> A -> A {
 	return { (let x) in
@@ -44,9 +44,8 @@ public func •<A>(var f : A -> A, times: UInt) -> A -> A {
 	}
 }
 
-
 /// Swap | Applies w and a to a verb on the left.
-infix operator ⊂ { associativity right }
+infix operator ⊂ : RightPrecedence
 
 public func ⊂<T, U>(f : U -> T, w : U) -> T {
 	return f(w)
@@ -57,13 +56,13 @@ public func ⊂<T>(f : T -> T -> T, w : T) -> T {
 }
 
 
-//infix operator ¨ { associativity right }
+//infix operator ¨ : RightPrecedence
 
-public func ¨<T, U>(x : T, f : T -> U -> T) -> U -> T {
-	return f(x)
+public func ¨<T, U>(_ x : T, _ f : T -> U -> T) -> U -> T {
+    return f(x)
 }
 
-public func foldl<A, B>(f: B -> A -> B)(initial: B)(xss: [A]) -> B {
+public func foldl<A, B>(_ f: B -> A -> B)(initial: B)(xss: [A]) -> B {
 	var xs = initial
 	for x in xss {
 		xs = f(xs)(x)

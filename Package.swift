@@ -24,5 +24,6 @@ let package = Package(
         .testTarget(
             name: "APLTests",
             dependencies: ["APL"])
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

@@ -99,7 +99,7 @@ public func ⍟(a: Double, w: Double) -> Double {
 }
 
 prefix public func ○(w: Double) -> Double {
-	return M_PI × w
+    return .pi × w
 }
 
 public func ○(l: Int, w: Double) -> Complex {
@@ -169,7 +169,7 @@ public func ○(l: Int, w: Double) -> Complex {
 		default:
 			break
 	}
-	println("Invalid argument passed to Circle \(w)")
+	print("Invalid argument passed to Circle \(w)")
 	assert(false, "")
 	return Complex()
 }
@@ -285,7 +285,7 @@ public func ⊣<T, V>(a: V, w: T) -> T {
 // MARK: Structural
 
 prefix public func ⌽<T>(w: [T]) -> [T] {
-	return w.reverse()
+	return w.reversed()
 }
 
 public func ⌽<T>(a: Int, w: [T]) -> [T] {

@@ -13,13 +13,19 @@ public struct Complex {
 	let imag : Double = 0.0
 
 	var inverse : Complex {
-	var denom = real * real + imag * imag
+        let denom = real * real + imag * imag
 		return Complex(real: real ÷ denom, imag: -imag ÷ denom)
 	}
-
 }
 
-infix operator ⊹ {}
+public extension Complex {
+    init(real: Double = 0.0, imag: Double = 0.0) {
+        self.real = real
+        self.imag = imag
+    }
+}
+
+infix operator ⊹
 
 public func ⊹(a : Double, w : Double) -> Complex {
 	return Complex(real: a, imag: w)
