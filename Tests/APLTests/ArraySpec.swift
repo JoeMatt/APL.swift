@@ -11,7 +11,7 @@ import XCTest
 import Swift
 import APL
 
-class ArraySpec : XCTestCase {
+class ArraySpec: XCTestCase {
     func testMonadIota() {
         let x = ⍳5
         let y = ⍳8
@@ -21,7 +21,7 @@ class ArraySpec : XCTestCase {
         XCTAssertTrue(y ≡ [0, 1, 2, 3, 4, 5, 6, 7], "")
         XCTAssertTrue(z ≡ [0], "")
     }
-    
+
     func testDimensions() {
         let x = [1, 2, 3, 4]
         let y = [[1, 2, 3, 4],
@@ -34,17 +34,16 @@ class ArraySpec : XCTestCase {
         XCTAssertTrue(⍴y ≡ [4, 2], "")
         XCTAssertTrue(⍴z ≡ [4, 2, 2], "")
     }
-    
+
     func testDyadRoll() {
         let x = 6¿40
-        
+
         XCTAssertTrue(x.count == 6, "")
-        
-        var y = Dictionary<Double, Void>()
+
+        var y = [Double: Void]()
         for i in x {
             y.updateValue(Void(), forKey: i)
         }
         XCTAssertTrue(x.count == y.count, "")
     }
 }
-

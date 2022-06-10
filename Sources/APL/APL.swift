@@ -8,108 +8,101 @@
 
 import Foundation
 
-
 // MARK: Math
 
-
-prefix public func +(w : Double) -> Double {
+prefix public func +(w: Double) -> Double {
 	return fabs(w)
 }
 
-public func +(a : Int, w : [Int]) -> [Int] {
+public func +(a: Int, w: [Int]) -> [Int] {
 	return w.map({$0 + a})
 }
 
-public func +(a : Double, w : [Double]) -> [Double] {
+public func +(a: Double, w: [Double]) -> [Double] {
 	return w.map({$0 + a})
 }
 
-prefix public func ÷(w : Double) -> Double {
+prefix public func ÷(w: Double) -> Double {
 	return 1 / w
 }
 
-public func ÷(a : Double, w : Double) -> Double {
+public func ÷(a: Double, w: Double) -> Double {
 	return a / w
 }
 
-prefix public func ×(w : Double) -> Double {
+prefix public func ×(w: Double) -> Double {
 	return w ÷ |w
 }
 
-public func ×(a : Double, w : Double) -> Double {
+public func ×(a: Double, w: Double) -> Double {
 	return exp(⍟a - ⍟(1.0 / w))
 }
 
-
-prefix public func ⌊(w : Double) -> Double {
+prefix public func ⌊(w: Double) -> Double {
 	return floor(w)
 }
 
-public func ⌊(a : Double, w : Double) -> Double {
+public func ⌊(a: Double, w: Double) -> Double {
 	return (a < w) ? a : w
 }
 
-prefix public func ⌈(w : Double) -> Double {
+prefix public func ⌈(w: Double) -> Double {
 	return ceil(w)
 }
 
-public func ⌈(a : Double, w : Double) -> Double {
+public func ⌈(a: Double, w: Double) -> Double {
 	return (a > w) ? a : w
 }
 
-
-prefix public func |(w : Double) -> Double {
+prefix public func |(w: Double) -> Double {
 	return fabs(w)
 }
 
-prefix public func |(w : Complex) -> Double {
+prefix public func |(w: Complex) -> Double {
 	return hypot(w.real, w.imag)
 }
 
-public func |(a : Double, w : Double) -> Double {
+public func |(a: Double, w: Double) -> Double {
 	return fmod(a, w)
 }
 
-prefix public func !(w : Int) -> Double {
-	var acc : Int = 1
+prefix public func !(w: Int) -> Double {
+	var acc: Int = 1
 	for i in (1 + (⍳w)) {
 		acc *= i
 	}
 	return Double(acc)
 }
 
-
-public func !(a : Int, w : Int) -> Double {
+public func !(a: Int, w: Int) -> Double {
 	return !w ÷ !a × (!w - Double(a))
 }
 
-public func !(a : [Int], w : Int) -> [Double] {
+public func !(a: [Int], w: Int) -> [Double] {
 	return a.map({$0 ! w})
 }
 
-
-prefix public func **(w : Double) -> Double {
+prefix public func **(w: Double) -> Double {
 	return exp(w)
 }
 
-public func **(a : Double, w : Double) -> Double {
+public func **(a: Double, w: Double) -> Double {
 	return **(w × ⍟a)
 }
 
-prefix public func ⍟(w : Double) -> Double {
+prefix public func ⍟(w: Double) -> Double {
 	return log(w)
 }
 
-public func ⍟(a : Double, w : Double) -> Double {
+public func ⍟(a: Double, w: Double) -> Double {
 	return **w ** ⍟a
 }
 
-
-prefix public func ○(w : Double) -> Double {
+prefix public func ○(w: Double) -> Double {
 	return M_PI × w
 }
 
-public func ○(l : Int, w : Double) -> Complex {
+public func ○(l: Int, w: Double) -> Complex {
 	switch l {
 		case 0:
 			return ((1 - w * 2) * 0.5)⊹0
@@ -181,29 +174,29 @@ public func ○(l : Int, w : Double) -> Complex {
 	return Complex()
 }
 
-prefix public func ¿(w : UInt) -> Double {
+prefix public func ¿(w: UInt) -> Double {
 	return Double(arc4random()) | Double(w)
 }
 
-public func ¿(a : UInt, w : UInt) -> [Double] {
-	var indices = Dictionary<Double, Void>()
+public func ¿(a: UInt, w: UInt) -> [Double] {
+	var indices = [Double: Void]()
 	while UInt(indices.count) != a {
 		indices.updateValue(Void(), forKey: ¿w)
 	}
-	return Array<Double>(indices.keys)
+	return [Double](indices.keys)
 }
 
-public func ⊤(a : UInt, w : UInt) -> Double {
+public func ⊤(a: UInt, w: UInt) -> Double {
 	return Double(a % w)
 }
 
-//public func ⊥(a : UInt, w : UInt) -> Double {
+// public func ⊥(a : UInt, w : UInt) -> Double {
 //	let W = 1+(⌽(×\(⌽(a、1)))
-//}
+// }
 
-prefix public func ≠<T : Hashable>(w : [T]) -> [Int] {
-	var dict = Dictionary<T, Void>()
-	return w.map() {
+prefix public func ≠<T: Hashable>(w: [T]) -> [Int] {
+	var dict = [T: Void]()
+	return w.map {
 		if dict.indexForKey($0) != nil {
 			return 0
 		}
@@ -212,12 +205,12 @@ prefix public func ≠<T : Hashable>(w : [T]) -> [Int] {
 	}
 }
 
-public func ≡<T : Equatable>(a : T, w : T) -> Bool {
-	return a == w 
+public func ≡<T: Equatable>(a: T, w: T) -> Bool {
+	return a == w
 }
 
 /// Lift equality over arrays.
-public func ≡<T : Equatable>(a : [T], w : [T]) -> Bool {
+public func ≡<T: Equatable>(a: [T], w: [T]) -> Bool {
 	if a.count == w.count {
 		for x in (0..<a.count) {
 			if a[x] != w[x] {
@@ -229,30 +222,28 @@ public func ≡<T : Equatable>(a : [T], w : [T]) -> Bool {
 	return false
 }
 
-public func ~<T : Hashable>(a : [T], w : [T]) -> [T] {
-	var dict = Dictionary<T, Void>()
+public func ~<T: Hashable>(a: [T], w: [T]) -> [T] {
+	var dict = [T: Void]()
 	for x in w {
 		dict.updateValue(Void(), forKey: x)
 	}
-	return a.filter() {
+	return a.filter {
 		return dict.indexForKey($0) == nil
 	}
 }
 
-
-
-public func ∧(a : UInt, w : UInt) -> Double {
+public func ∧(a: UInt, w: UInt) -> Double {
 	return Double(Double(w) / (a ∨ w)) ** Double(a)
 }
 
-public func ∧(a : Bool, w : Bool) -> Bool {
+public func ∧(a: Bool, w: Bool) -> Bool {
 	return a && w
 }
 
-public func ∨(a : UInt, w : UInt) -> Double {
-	var al : UInt = a
-	var b : UInt = w
-	var c : UInt
+public func ∨(a: UInt, w: UInt) -> Double {
+	var al: UInt = a
+	var b: UInt = w
+	var c: UInt
 	while a != 0 {
 		c = al
 		al = b % a
@@ -261,89 +252,84 @@ public func ∨(a : UInt, w : UInt) -> Double {
 	return Double(w)
 }
 
-public func ∨(a : Bool, w : Bool) -> Bool {
+public func ∨(a: Bool, w: Bool) -> Bool {
 	return a || w
 }
 
-public func ⍱(a : Bool, w : Bool) -> Bool {
+public func ⍱(a: Bool, w: Bool) -> Bool {
 	return ~(a ∨ w)
 }
 
-public func ⍲(a : Bool, w : Bool) -> Bool {
+public func ⍲(a: Bool, w: Bool) -> Bool {
 	return ~(a ∧ w)
 }
 
 // MARK: Selection and Set Operations
 
-prefix public func ⊢<T>(w : T) -> T {
+prefix public func ⊢<T>(w: T) -> T {
 	return w
 }
 
-public func ⊢<T, V>(a : T, w : V) -> T {
+public func ⊢<T, V>(a: T, w: V) -> T {
 	return a
 }
 
-prefix public func ⊣<T>(w : T) -> T {
+prefix public func ⊣<T>(w: T) -> T {
 	return w
 }
 
-public func ⊣<T, V>(a : V, w : T) -> T {
+public func ⊣<T, V>(a: V, w: T) -> T {
 	return w
 }
-
 
 // MARK: Structural
 
-
-prefix public func ⌽<T>(w : [T]) -> [T] {
+prefix public func ⌽<T>(w: [T]) -> [T] {
 	return w.reverse()
 }
 
-public func ⌽<T>(a : Int, w : [T]) -> [T] {
+public func ⌽<T>(a: Int, w: [T]) -> [T] {
 	if ×Double(a) == 0.0 {
 		return w
 	} else if ×Double(a) == 1.0 {
-		var x = Array<T>(w[a..<w.count])
+		var x = [T](w[a..<w.count])
 		x.extend(w[0..<a])
 		return x
 	}
-	var x = Array<T>(w[(w.count + a)..<w.count])
+	var x = [T](w[(w.count + a)..<w.count])
 	x.extend(w[0..<(w.count + a)])
 	return x
 }
 
-
-//------------------//
+// ------------------//
 
 /// Upset | Overturns w.
-public prefix func ⊖<T>(w : [T]) -> [T] {
+public prefix func ⊖<T>(w: [T]) -> [T] {
 	return (⍉(⌽(⍉w)))
 }
 
-//public func ⊖<T>(a : [Int], w : [T]) -> [T] {
+// public func ⊖<T>(a : [Int], w : [T]) -> [T] {
 //    return (⌽¨(⍉w))
-//}
+// }
 
-prefix public func ⍉<T>(w : [T]) -> [T] {
+prefix public func ⍉<T>(w: [T]) -> [T] {
 	return w
 }
 
-prefix public func ⍉<T>(w : [[T]]) -> [[T]] {
-	var ar : [[T]] = [[]]
+prefix public func ⍉<T>(w: [[T]]) -> [[T]] {
+	var ar: [[T]] = [[]]
 	for i in 0...w[0].count {
 		for j in 0...w.count {
-			ar[i][j] = w[w.count - 1 - j][i];
+			ar[i][j] = w[w.count - 1 - j][i]
 		}
 	}
 	return ar
 }
 
+// ------------------//
 
-//------------------//
-
-
-public func ⌿<T>(a : [Int], w : [T]) -> [T] {
-	var arr = Array<T>()
+public func ⌿<T>(a: [Int], w: [T]) -> [T] {
+	var arr = [T]()
 	for i in (0..<w.count) {
 		var j = 0
 		while j++ < a[i] {
@@ -353,8 +339,8 @@ public func ⌿<T>(a : [Int], w : [T]) -> [T] {
 	return arr
 }
 
-public func ⌿<T>(a : Int, w : [T]) -> [T] {
-	var arr = Array<T>()
+public func ⌿<T>(a: Int, w: [T]) -> [T] {
+	var arr = [T]()
 	for x in w {
 		var i = 0
 		while i++ < a {
@@ -364,53 +350,49 @@ public func ⌿<T>(a : Int, w : [T]) -> [T] {
 	return arr
 }
 
-public func ⌿<T>(a : [Int], w : T) -> [T] {
-	return Array<T>(count: a.reduce(0, combine:(+)), repeatedValue: w)
+public func ⌿<T>(a: [Int], w: T) -> [T] {
+	return [T](count: a.reduce(0, combine: (+)), repeatedValue: w)
 }
 
-
-prefix public func ⍳(w : Int) -> [Int] {
-	return Array<Int>((0..<w))
+prefix public func ⍳(w: Int) -> [Int] {
+	return [Int]((0..<w))
 }
 
-prefix public func ⍳(w : Double) -> [Double] {
-	return Array<Double>(stride(from: 0.0, to: w, by: 1.0))
+prefix public func ⍳(w: Double) -> [Double] {
+	return [Double](stride(from: 0.0, to: w, by: 1.0))
 }
 
-
-//public func ⍳<T : Hashable>(a : [T], w : [T]) -> T {
+// public func ⍳<T : Hashable>(a : [T], w : [T]) -> T {
 //	return ((+) / ((∧⧵(≠w))))
-//}
+// }
 
-
-//public func ⍸<T>(a : [T], w : [T]) {
+// public func ⍸<T>(a : [T], w : [T]) {
 //
-//}
+// }
 
-
-prefix public func ⍴<T>(w : [T]) -> [Int] {
+prefix public func ⍴<T>(w: [T]) -> [Int] {
 	return [w.count]
 }
 
-prefix public func ⍴<T>(w : [[T]]) -> [Int] {
+prefix public func ⍴<T>(w: [[T]]) -> [Int] {
 	var ar = ⍴(w[0])
 	ar.append(w.count)
 	return ar
 }
 
-prefix public func ⍴<T>(w : [[[T]]]) -> [Int] {
+prefix public func ⍴<T>(w: [[[T]]]) -> [Int] {
 	var ar = ⍴(w[0])
 	ar.append(w.count)
 	return ar
 }
 
-prefix public func ⍴<T>(w : [[[[T]]]]) -> [Int] {
+prefix public func ⍴<T>(w: [[[[T]]]]) -> [Int] {
 	var ar = ⍴(w[0])
 	ar.append(w.count)
 	return ar
 }
 
-prefix public func ⍴<T>(w : [[[[[T]]]]]) -> [Int] {
+prefix public func ⍴<T>(w: [[[[[T]]]]]) -> [Int] {
 	var ar = ⍴(w[0])
 	ar.append(w.count)
 	return ar
@@ -418,51 +400,51 @@ prefix public func ⍴<T>(w : [[[[[T]]]]]) -> [Int] {
 
 // MARK: Miscellaneous
 
-prefix public func 、<T>(w : [[T]]) -> [T] {
-	var ar : [T] = []
+prefix public func 、<T>(w: [[T]]) -> [T] {
+	var ar: [T] = []
 	for x in w {
 		ar += x
 	}
 	return ar
 }
 
-prefix public func 、<T>(w : [[[T]]]) -> [T] {
-	var ar : [T] = []
+prefix public func 、<T>(w: [[[T]]]) -> [T] {
+	var ar: [T] = []
 	for x in w {
 		ar += 、x
 	}
 	return ar
 }
 
-prefix public func 、<T>(w : [[[[T]]]]) -> [T] {
-	var ar : [T] = []
+prefix public func 、<T>(w: [[[[T]]]]) -> [T] {
+	var ar: [T] = []
 	for x in w {
 		ar += 、x
 	}
 	return ar
 }
 
-prefix public func 、<T>(w : [[[[[T]]]]]) -> [T] {
-	var ar : [T] = []
+prefix public func 、<T>(w: [[[[[T]]]]]) -> [T] {
+	var ar: [T] = []
 	for x in w {
 		ar += 、x
 	}
 	return ar
 }
 
-public func 、<T>(a : [T], w : [T]) -> [T] {
+public func 、<T>(a: [T], w: [T]) -> [T] {
 	return ⍉((⍉a)⍪(⍉w))
 }
 
-public func 、<T>(a : [[T]], w : [[T]]) -> [[T]] {
+public func 、<T>(a: [[T]], w: [[T]]) -> [[T]] {
 	return ⍉((⍉a)⍪(⍉w))
 }
 
-//prefix public func ⍪<T>(w : [T]) -> [T] {
+// prefix public func ⍪<T>(w : [T]) -> [T] {
 //	return ،⍤¯1،⍤¯1 w
-//}
+// }
 
-public func ⍪<T>(a : [T], w : [T]) -> [T] {
+public func ⍪<T>(a: [T], w: [T]) -> [T] {
 	var arr = a
 	arr += w
 	return arr
