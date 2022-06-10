@@ -11,12 +11,12 @@ import Foundation
 public struct Complex {
 	let real : Double = 0.0
 	let imag : Double = 0.0
-	
+
 	var inverse : Complex {
 	var denom = real * real + imag * imag
 		return Complex(real: real ÷ denom, imag: -imag ÷ denom)
 	}
-	
+
 }
 
 infix operator ⊹ {}
